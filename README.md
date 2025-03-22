@@ -97,3 +97,12 @@
     </script>
 </body>
 </html>
+<div id="login-container">
+    <h2>Login</h2>
+    <form id="login-form">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+    <div id="login-error" style="color: red;"></div>
+</div>
