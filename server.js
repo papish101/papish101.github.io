@@ -17,8 +17,15 @@ app.use('/api/users', userRoutes);
 app.use('/api/exams', examRoutes);
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/cbt_exam', { useNewUrlParser: true, useUnifiedTopology: true })
+const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/cbt_exam';
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
-    .catch(err => console.log(err));
+    .catch(err => console.log('MongoDB connection error:', err));
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
+});
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
