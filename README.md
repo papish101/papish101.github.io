@@ -20,7 +20,7 @@
         </form>
         <p id="toggle">Don't have an account? Register here</p>
     </div>
-    <p><a href="README.md"></a></p>
+    <p><a href="login.html"></a></p>
 
     <script>
         const form = document.getElementById('auth-form');
