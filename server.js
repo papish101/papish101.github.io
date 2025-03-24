@@ -2,6 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+app.use(cors({
+    origin: 'https://papish101.github.io/#form-title',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true
+}));
+
 const userRoutes = require('./routes/userRoutes');
 const examRoutes = require('./routes/examRoutes');
 
