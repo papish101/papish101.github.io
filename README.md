@@ -2,18 +2,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBT Exam Login</title>
+    <title>CBT Exam - Login & Register</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
+        #container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input, button { width: 100%; padding: 10px; margin: 10px 0; }
+        #toggle { color: blue; cursor: pointer; text-decoration: underline; }
+    </style>
 </head>
 <body>
-    <h1>CBT Exam Login</h1>
-    <form id="login-form">
-        <input type="text" id="username" placeholder="Username" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-    </form>
-    <div id="message"></div>
-    <script src="script.js"></script>
+    <div id="container">
+        <h2 id="form-title">Login</h2>
+        <form id="auth-form">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p id="toggle">Don't have an account? Register here</p>
+    </div>
+    <p><a href="README.md"></a></p>
+
+    <script>
+        const form = document.getElementById('auth-form');
+        const formTitle = document.getElementById('form-title');
+        const toggle = document.getElementById('toggle');
+        let isLogin = true;
+
+        // Toggle between login and registration
+        toggle.addEventListener('click', () => {
+            isLogin = !isLogin;
+            formTitle.textContent = isLogin ? 'Login' : 'Register';
+            form.querySelector('button').textContent = isLogin ? 'Login' : 'Register';
+            toggle.textContent = isLogin ? "Don't have an account? Register here" : "Already have an account? Login here";
+        });
+
+        // Handle form submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const endpoint = isLogin ? '/auth/login' : '/auth/register';
+
+            try {
+                const response = await fetch(`http://localhost:5000${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert(isLogin ? 'Login successful!' : 'Registration successful!');
+                    if (isLogin) window.location.href = '/exam.html';
+                } else {
+                    alert(data.message || 'Something went wrong');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to connect to the server');
+            }
+        });
+    </script>
 </body>
 </html>
-<p><a href="README.md"></a></p>
-
