@@ -25,6 +25,7 @@
         <button onclick="nextQuestion()">Next</button>
         <button onclick="submitExam()" style="display: none;">Submit</button>
     </div>
+    <p><a href="login.html"></a></p>
 
     <script>
         const questions = [
