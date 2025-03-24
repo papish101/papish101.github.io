@@ -37,3 +37,4 @@ form.addEventListener('submit', async (e) => {
         alert('Failed to connect to the server');
     }
 });
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e8398b70-3af3-4ee8-a49c-81c4964e577c/deploy-status)](https://app.netlify.com/sites/visionary-dango-f5c570/deploys)
